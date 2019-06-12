@@ -2,6 +2,8 @@ package jp.co.sample.emp_management.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +29,10 @@ public class EmployeeController {
 	@Autowired
 	private EmployeeService employeeService;
 	
+	@Autowired
+	private HttpSession session;
+
+	
 	/**
 	 * 使用するフォームオブジェクトをリクエストスコープに格納する.
 	 * 
@@ -48,6 +54,10 @@ public class EmployeeController {
 	 */
 	@RequestMapping("/showList")
 	public String showList(Model model) {
+		String name = (String) session.getAttribute("administratorName");
+		if (name == null) {
+			return "redirect:/";
+		}
 		List<Employee> employeeList = employeeService.showList();
 		model.addAttribute("employeeList", employeeList);
 		return "employee/list";
@@ -66,6 +76,11 @@ public class EmployeeController {
 	 */
 	@RequestMapping("/showDetail")
 	public String showDetail(String id, Model model) {
+		String name = (String) session.getAttribute("administratorName");
+		if (name == null) {
+			return "redirect:/";
+		}
+
 		Employee employee = employeeService.showDetail(Integer.parseInt(id));
 		model.addAttribute("employee", employee);
 		return "employee/detail";
@@ -83,6 +98,11 @@ public class EmployeeController {
 	 */
 	@RequestMapping("/update")
 	public String update(@Validated UpdateEmployeeForm form, BindingResult result, Model model) {
+		String name = (String) session.getAttribute("administratorName");
+		if (name == null) {
+			return "redirect:/";
+		}
+
 		if(result.hasErrors()) {
 			return showDetail(form.getId(), model);
 		}

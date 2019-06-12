@@ -95,6 +95,10 @@ public class AdministratorController {
 	 */
 	@RequestMapping("/")
 	public String toLogin() {
+		String name=(String)session.getAttribute("administratorName");
+		if(name!=null) {
+			return "redirect:/employee/showList";
+		}
 		return "administrator/login";
 	}
 
@@ -115,7 +119,8 @@ public class AdministratorController {
 			result.rejectValue("password",null, "メールアドレスまたはパスワードが不正です。");
 			return toLogin();
 		}
-		
+		session.setAttribute("administratorName", administrator.getName());
+		session.setAttribute("administratorId", administrator.getId());		
 		return "redirect:/employee/showList";
 	}
 	
