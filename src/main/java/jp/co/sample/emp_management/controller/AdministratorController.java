@@ -70,14 +70,19 @@ public class AdministratorController {
 	 */
 	@RequestMapping("/insert")
 	public String insert(@Validated InsertAdministratorForm form,BindingResult result) {
-		if (result.hasErrors()) {
+		String mail=form.getMailAddress();
+		if(! administratorService.existMail(mail)) {
+			result.rejectValue("mailAddress",null, "メールアドレスは既に使われています");
+		}
+		if(result.hasErrors()) {
 			return toInsert();
 		}
 		Administrator administrator = new Administrator();
 		// フォームからドメインにプロパティ値をコピー
-		BeanUtils.copyProperties(form, administrator);
 		administratorService.insert(administrator);
+		BeanUtils.copyProperties(form, administrator);
 		return "redirect:/";
+				
 	}
 
 	/////////////////////////////////////////////////////
@@ -110,6 +115,7 @@ public class AdministratorController {
 			result.rejectValue("password",null, "メールアドレスまたはパスワードが不正です。");
 			return toLogin();
 		}
+		
 		return "forward:/employee/showList";
 	}
 	
