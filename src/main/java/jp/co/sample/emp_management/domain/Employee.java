@@ -1,5 +1,6 @@
 package jp.co.sample.emp_management.domain;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -180,6 +181,22 @@ public class Employee {
 	public void setDependentsCount(Integer dependentsCount) {
 		this.dependentsCount = dependentsCount;
 	}
+	
+	public String getStrHireDate() {
+        String strHireDate = new SimpleDateFormat("yyyy年MM月dd日").format(hireDate);
+		return strHireDate;
+	}
+
+	public void setStrHireDate(String strHireDate) {
+		try {
+			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy年MM月dd日");
+		    Date date = sdFormat.parse(strHireDate);
+			this.hireDate = date;			
+		}catch(Exception e) {
+			System.err.println(e);
+		}
+	}
+
 
 	@Override
 	public String toString() {
