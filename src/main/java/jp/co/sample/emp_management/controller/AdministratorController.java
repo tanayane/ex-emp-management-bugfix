@@ -104,6 +104,7 @@ public class AdministratorController {
 	 */
 	@RequestMapping("/login")
 	public String login(@Validated LoginForm form, BindingResult result, Model model) {
+
 		Administrator administrator = administratorService.login(form.getMailAddress(), form.getPassword());
 		if (administrator == null) {
 			result.rejectValue("password",null, "メールアドレスまたはパスワードが不正です。");
