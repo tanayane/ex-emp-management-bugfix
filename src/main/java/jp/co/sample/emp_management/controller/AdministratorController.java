@@ -116,7 +116,7 @@ public class AdministratorController {
 			return toLogin();
 		}
 		
-		return "forward:/employee/showList";
+		return "redirect:/employee/showList";
 	}
 	
 	/////////////////////////////////////////////////////
