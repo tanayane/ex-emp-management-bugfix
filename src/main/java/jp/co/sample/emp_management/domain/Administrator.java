@@ -21,6 +21,7 @@ public class Administrator {
 	 */
 	public Administrator() {
 	}
+	
 
 	/**
 	 * 初期化用コンストラクタ.

@@ -74,6 +74,9 @@ public class AdministratorController {
 		if(! administratorService.existMail(mail)) {
 			result.rejectValue("mailAddress",null, "メールアドレスは既に使われています");
 		}
+		if(! form.getPassword().equals(form.getComfirmPassword())) {
+			result.rejectValue("comfirmPassword", null,"同じパスワードを入力してください");
+		}
 		if(result.hasErrors()) {
 			return toInsert();
 		}

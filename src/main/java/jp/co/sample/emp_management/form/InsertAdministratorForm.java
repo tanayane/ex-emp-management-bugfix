@@ -20,6 +20,17 @@ public class InsertAdministratorForm {
 	/** パスワード */
 	@NotBlank(message="パスワードを入力してください")
 	private String password;
+	/** 確認用パスワード */
+	@NotBlank(message="確認用パスワードを入力してください")
+	private String comfirmPassword;
+	
+	
+	public String getComfirmPassword() {
+		return comfirmPassword;
+	}
+	public void setComfirmPassword(String comfirmPassword) {
+		this.comfirmPassword = comfirmPassword;
+	}
 	public String getName() {
 		return name;
 	}
@@ -38,10 +49,11 @@ public class InsertAdministratorForm {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	
 	@Override
 	public String toString() {
 		return "InsertAdministratorForm [name=" + name + ", mailAddress=" + mailAddress + ", password=" + password
-				+ "]";
+				+ ",confirmpassword="+comfirmPassword+"]";
 	}
 	
 }
