@@ -56,7 +56,7 @@
 			<li class="active"><a href="list.html" th:href="@{'/employee/showList?page='+${session.page}}">従業員リスト</a></li>
 		</ol>
 			<form action="list.html" th:action="@{/employee/search}">
-				<input type="search" name="searchName">
+				<input type="search" name="searchName" id="searchName">
 				<input type="hidden" name="page" value=1>
 				<button>検索</button>
 				<span class="error-messages"th:if="${error}!=null" th:text="${error}">error</span>
@@ -76,7 +76,7 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>従業員名</th>
+							<th id="ththth">従業員名</th>
 							<th>入社日</th>
 							<th>扶養人数</th>
 						</tr>
@@ -112,8 +112,19 @@
 	</div>
 	<!-- end container -->
 	
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.10.4/jquery-ui.min.js"></script>
 	<script src="../../static/js/bootstrap.min.js"></script>
+	<script>
+	$(function(){
+		var tags=["ead","aas","dsdf","ref","kasdf"];
+		
+		$("#searchName").autocomplete({
+			source:tags
+		});
+		
+	});
+
+	</script>
 </body>
 </html>

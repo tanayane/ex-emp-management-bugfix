@@ -136,7 +136,6 @@ public class EmployeeController {
 		}
 		List<Employee> employeeList=employeeService.findByName(searchName,page);
 		if(employeeList==null) {
-			System.out.println("koko");
 			model.addAttribute("error","＊検索結果はありませんでした");
 			return showList((Integer)session.getAttribute("page"),model);
 		}

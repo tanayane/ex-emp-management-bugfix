@@ -21,7 +21,7 @@ public class NotFoundController implements ErrorController{
 	@Override
 	@RequestMapping(PATH)
 	public String getErrorPath() {
-		System.out.println("404 error");
+		//System.out.println("404 error");
 		return "common/notfound";
 	}
 }
