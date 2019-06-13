@@ -22,6 +22,10 @@ import jp.co.sample.emp_management.service.AdministratorService;
  * @author igamasayuki
  *
  */
+/**
+ * @author ayane.tanaka
+ *
+ */
 @Controller
 @RequestMapping("/")
 public class AdministratorController {
@@ -100,7 +104,7 @@ public class AdministratorController {
 	public String toLogin() {
 		String name=(String)session.getAttribute("administratorName");
 		if(name!=null) {
-			return "redirect:/employee/showList";
+			return "redirect:/employee/showList?page="+getPage();
 		}
 		return "administrator/login";
 	}
@@ -124,7 +128,7 @@ public class AdministratorController {
 		}
 		session.setAttribute("administratorName", administrator.getName());
 		session.setAttribute("administratorId", administrator.getId());		
-		return "redirect:/employee/showList";
+		return "redirect:/employee/showList?page="+getPage();
 	}
 	
 	/////////////////////////////////////////////////////
@@ -141,4 +145,17 @@ public class AdministratorController {
 		return "redirect:/";
 	}
 	
+	/**
+	 * 従業員リストの現在ページ数を返す.
+	 * 
+	 * @return 現在のページ数
+	 */
+	public Integer getPage() {
+		Integer page=(Integer)session.getAttribute("page");
+		if(page==null) {
+			return 1;
+		}
+		return page;
+	}
+
 }

@@ -60,9 +60,6 @@ public class EmployeeController {
 		if (name == null) {
 			return "redirect:/";
 		}
-		if (page == null) {
-			page = 1;
-		}
 		List<Employee> employeeList = employeeService.showList();
 		List<Employee> fragmentsEmployeeList = new ArrayList<>();
 		try {
@@ -73,7 +70,7 @@ public class EmployeeController {
 			
 		}finally{
 			model.addAttribute("employeeList", fragmentsEmployeeList);
-			model.addAttribute("page",page);
+			session.setAttribute("page",page);
 			model.addAttribute("size", employeeList.size());
 			return "employee/list";
 		}
@@ -126,6 +123,12 @@ public class EmployeeController {
 		employee.setId(form.getIntId());
 		employee.setDependentsCount(form.getIntDependentsCount());
 		employeeService.update(employee);
-		return "redirect:/employee/showList";
+		
+		Integer page=(Integer)session.getAttribute("page");
+		if(page==null) {page=1;}
+		return "redirect:/employee/showList?page="+page;
 	}
+	
+	
+
 }

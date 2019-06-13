@@ -27,7 +27,7 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="list.html" th:href="@{/employee/showList}"> 
+					<a class="navbar-brand" href="list.html" th:href="@{'/employee/showList?page='+${session.page}}"> 
 						<!-- 企業ロゴ -->
 						<img src="../../static/img/header_logo_small.png" th:src="@{/img/header_logo_small.png}">
 					</a>
@@ -37,7 +37,7 @@
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="list.html" th:href="@{/employee/showList}">従業員管理</a></li>
+						<li class="active"><a href="list.html" th:href="@{'/employee/showList?page='+${session.page}}">従業員管理</a></li>
 					</ul>
 					<p class="navbar-text navbar-right">
 					   <span th:text="${session.administratorName}">山田太郎</span>さんこんにちは！
@@ -52,7 +52,7 @@
 
 		<!-- パンくずリスト -->
 		<ol class="breadcrumb">
-			<li><a href="list.html" th:href="@{/employee/showList}">従業員リスト</a></li>
+			<li><a href="list.html" th:href="@{'/employee/showList?page='+${session.page}}">従業員リスト</a></li>
 			<li class="active">従業員詳細</li>
 		</ol>
 		
@@ -168,6 +168,7 @@
 							  </tr>
 							</table>
 							<button type="submit" class="btn btn-primary">更新</button>
+							<a href="#" th:href="@{'/employee/showList?page='+${session.page}}"><button type="button" class="btn btn-primary">戻る</button></a>
 						</fieldset>
 					</form>
 					
