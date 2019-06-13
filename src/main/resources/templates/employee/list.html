@@ -51,9 +51,16 @@
 		</nav>
 		
 		<!-- パンくずリスト -->
-		<ol class="breadcrumb">
+		<div class="breadcrumb">
+		<ol >
 			<li class="active"><a href="list.html" th:href="@{'/employee/showList?page='+${session.page}}">従業員リスト</a></li>
 		</ol>
+			<form action="list.html" th:action="@{/employee/search}" th:object="${employeeSearchForm}">
+				<input type="search" name="searchName" th:field="*{searchName}">
+				<button>検索</button>
+			</form>
+			
+		</div>
 
 		<!-- table -->
 		<div class="row">

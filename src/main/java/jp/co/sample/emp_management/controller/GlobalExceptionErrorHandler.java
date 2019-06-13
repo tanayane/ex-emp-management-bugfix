@@ -26,7 +26,7 @@ public class GlobalExceptionErrorHandler implements HandlerExceptionResolver{
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler,
 			Exception ex) {
-		logger.error("システムエラー発生");
+		logger.error("システムエラー発生",ex);
 		return new ModelAndView("redirect:/common/maintenance");
 	}
 
