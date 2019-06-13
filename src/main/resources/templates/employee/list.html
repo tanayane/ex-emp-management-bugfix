@@ -88,6 +88,12 @@
 						</tr>
 					</tbody>
 				</table>
+				<div>
+					<a href="list.html" th:if="${page}>1" th:href="@{'/employee/showList?page='+${page-1}}">前へ</a>
+					<span th:text="${page}">1</span>
+					<a href="list.html" th:if="${page}!=${(size/10)+1}" th:href="@{'/employee/showList?page='+${page+1}}">次へ</a>
+				</div>
+
 
 
 <!-- ここから下を編集する必要はありません -->

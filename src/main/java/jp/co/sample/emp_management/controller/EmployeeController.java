@@ -1,5 +1,6 @@
 package jp.co.sample.emp_management.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -52,15 +53,30 @@ public class EmployeeController {
 	 * @param model モデル
 	 * @return 従業員一覧画面
 	 */
+	@SuppressWarnings("finally")
 	@RequestMapping("/showList")
-	public String showList(Model model) {
+	public String showList(Integer page,Model model) {
 		String name = (String) session.getAttribute("administratorName");
 		if (name == null) {
 			return "redirect:/";
 		}
+		if (page == null) {
+			page = 1;
+		}
 		List<Employee> employeeList = employeeService.showList();
-		model.addAttribute("employeeList", employeeList);
-		return "employee/list";
+		List<Employee> fragmentsEmployeeList = new ArrayList<>();
+		try {
+			for (int i = (page-1)*10; i < page * 10; i++) {
+				fragmentsEmployeeList.add(employeeList.get(i));
+			}
+		}catch(Exception e) {
+			
+		}finally{
+			model.addAttribute("employeeList", fragmentsEmployeeList);
+			model.addAttribute("page",page);
+			model.addAttribute("size", employeeList.size());
+			return "employee/list";
+		}
 	}
 
 	
