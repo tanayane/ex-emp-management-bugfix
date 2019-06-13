@@ -27,7 +27,7 @@
 							class="icon-bar"></span> <span class="icon-bar"></span> <span
 							class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="list.html" th:href="@{'/employee/showList?page='+${session.page}}"> 
+					<a class="navbar-brand" href="list.html" th:href="@{/employee/showList?page=1}"> 
 						<!-- 企業ロゴ -->
 						<img src="../../static/img/header_logo_small.png" th:src="@{/img/header_logo_small.png}">
 					</a>
@@ -37,7 +37,7 @@
 				<div class="collapse navbar-collapse"
 					id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="list.html" th:href="@{'/employee/showList?page='+${session.page}}">従業員管理</a></li>
+						<li class="active"><a href="list.html" th:href="@{/employee/showList?page=1}">従業員管理</a></li>
 					</ul>
 					<p class="navbar-text navbar-right">
 						<span th:text="${session.administratorName}">山田太郎</span>さんこんにちは！
@@ -53,7 +53,7 @@
 		<!-- パンくずリスト -->
 		<div class="breadcrumb">
 		<ol >
-			<li class="active"><a href="list.html" th:href="@{'/employee/showList?page='+${session.page}}">従業員リスト</a></li>
+			<li class="active"><a href="list.html" th:href="@{/employee/showList?page=1}">従業員リスト</a></li>
 		</ol>
 			<form action="list.html" th:action="@{/employee/search}">
 				<input type="search" name="searchName">
@@ -97,9 +97,9 @@
 					</tbody>
 				</table>
 				<div>
-					<a href="list.html" th:if="${session.page}>1" th:href="@{'/employee/showList?page='+${session.page-1}}">前へ</a>
+					<a href="list.html" th:if="${session.page}>1" th:href="@{'/employee/search?searchName='+${searchName}+'&page='+${session.page-1}}">前へ</a>
 					<span th:text="${session.page}">1</span>
-					<a href="list.html" th:if="${size}==10" th:href="@{'/employee/showList?page='+${session.page+1}}">次へ</a>
+					<a href="list.html" th:if="${size}==10" th:href="@{'/employee/search?searchName='+${searchName}+'&page='+${session.page+1}}">次へ</a>
 				</div>
 
 

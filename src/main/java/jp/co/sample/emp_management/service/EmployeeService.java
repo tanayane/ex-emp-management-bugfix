@@ -1,5 +1,6 @@
 package jp.co.sample.emp_management.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +28,20 @@ public class EmployeeService {
 	 * 
 	 * @return　従業員情報一覧
 	 */
-	public List<Employee> showList() {
+	@SuppressWarnings("finally")
+	public List<Employee> showList(Integer page) {
 		List<Employee> employeeList = employeeRepository.findAll();
-		return employeeList;
+		List<Employee> fragmentsEmployeeList = new ArrayList<>();
+		try {
+			for (int i = (page-1)*10; i < page * 10; i++) {
+				fragmentsEmployeeList.add(employeeList.get(i));
+			}
+		}catch(Exception e) {
+			
+		}finally{
+			return fragmentsEmployeeList;
+		}
+
 	}
 	
 	/**
@@ -59,7 +71,20 @@ public class EmployeeService {
 	 * @param name 検索したい名前
 	 * @return 検索結果のリスト
 	 */
-	public List<Employee> findByName(String name){
-		return employeeRepository.findByName(name);
+	@SuppressWarnings("finally")
+	public List<Employee> findByName(String name,Integer page){
+		List<Employee>employeeList=employeeRepository.findByName(name);
+		
+		List<Employee> fragmentsEmployeeList = new ArrayList<>();
+		try {
+			for (int i = (page-1)*10; i < page * 10; i++) {
+				fragmentsEmployeeList.add(employeeList.get(i));
+			}
+		}catch(Exception e) {
+			
+		}finally{
+			return fragmentsEmployeeList;
+		}
+
 	}
 }

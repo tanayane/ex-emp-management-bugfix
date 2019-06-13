@@ -1,6 +1,5 @@
 package jp.co.sample.emp_management.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -58,27 +57,17 @@ public class EmployeeController {
 	 * @param model モデル
 	 * @return 従業員一覧画面
 	 */
-	@SuppressWarnings("finally")
 	@RequestMapping("/showList")
 	public String showList(Integer page,Model model) {
 		String name = (String) session.getAttribute("administratorName");
 		if (name == null) {
 			return "redirect:/";
 		}
-		List<Employee> employeeList = employeeService.showList();
-		List<Employee> fragmentsEmployeeList = new ArrayList<>();
-		try {
-			for (int i = (page-1)*10; i < page * 10; i++) {
-				fragmentsEmployeeList.add(employeeList.get(i));
-			}
-		}catch(Exception e) {
-			
-		}finally{
-			model.addAttribute("employeeList", fragmentsEmployeeList);
-			session.setAttribute("page",page);
-			model.addAttribute("size", employeeList.size());
-			return "employee/list";
-		}
+		List<Employee> employeeList = employeeService.showList(page);
+		model.addAttribute("employeeList", employeeList);
+		session.setAttribute("page",page);
+		model.addAttribute("size", employeeList.size());
+		return "employee/list";
 	}
 
 	
@@ -140,15 +129,20 @@ public class EmployeeController {
 	/////////////////////////////////////////////////////
 
 	@RequestMapping("/search")
-	public String search(@Validated EmployeeSearchForm form,BindingResult result,Model model) {
-		List<Employee> employeeList=employeeService.findByName(form.getSearchName());
+	public String search(String searchName,Integer page,Model model) {
+		String name = (String) session.getAttribute("administratorName");
+		if (name == null) {
+			return "redirect:/";
+		}
+		List<Employee> employeeList=employeeService.findByName(searchName,page);
 		if(employeeList==null) {
-			result.rejectValue("searchName", null,"＊検索結果はありませんでした");
+			model.addAttribute("error","＊検索結果はありませんでした");
 			return showList((Integer)session.getAttribute("page"),model);
 		}
 		model.addAttribute("employeeList",employeeList);
-		session.setAttribute("page",1);
+		model.addAttribute("searchName",searchName);
+		session.setAttribute("page",page);
 		model.addAttribute("size", employeeList.size());
-		return "employee/list";
+		return "employee/search";
 	}
 }

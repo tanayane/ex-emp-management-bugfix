@@ -92,7 +92,7 @@ public class EmployeeRepository {
 	 * @return　検索結果のリスト
 	 */
 	public List<Employee> findByName(String name) {
-		String sql = "SELECT id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characteristics,dependents_count FROM employees WHERE name like :name";
+		String sql = "SELECT id,name,image,gender,hire_date,mail_address,zip_code,address,telephone,salary,characteristics,dependents_count FROM employees WHERE name like :name ORDER BY hire_date";
 
 		SqlParameterSource param = new MapSqlParameterSource().addValue("name", "%"+name+"%");
 
