@@ -74,7 +74,7 @@ public class EmployeeService {
 	@SuppressWarnings("finally")
 	public List<Employee> findByName(String name,Integer page){
 		List<Employee>employeeList=employeeRepository.findByName(name);
-		
+		if(employeeList.size()==0) {return null;}
 		List<Employee> fragmentsEmployeeList = new ArrayList<>();
 		try {
 			for (int i = (page-1)*10; i < page * 10; i++) {

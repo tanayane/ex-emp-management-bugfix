@@ -59,6 +59,7 @@
 				<input type="search" name="searchName">
 				<input type="hidden" name="page" value=1>
 				<button>検索</button>
+				<span class="error-messages"th:if="${error}!=null" th:text="${error}">error</span>
 			</form>
 			
 		</div>
