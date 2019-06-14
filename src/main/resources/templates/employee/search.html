@@ -13,6 +13,26 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet"
+	href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<script src="../../static/js/bootstrap.min.js" type="text/plain"></script>
+<script th:inline="javascript">
+	$(function(){
+		var nameTags=/*[[${names}]]*/ [];
+		console.log(nameTags);
+		
+		$("#searchName").autocomplete({
+			source:nameTags
+		});
+	});
+
+	</script>
+
 </head>
 <body>
 	<div class="container">
@@ -56,10 +76,11 @@
 			<li class="active"><a href="list.html" th:href="@{/employee/showList?page=1}">従業員リスト</a></li>
 		</ol>
 			<form action="list.html" th:action="@{/employee/search}">
-				<input type="search" name="searchName">
-				<input type="hidden" name="page" value=1>
-				<span class="error-messages" th:if="${error}!=null" th:text="${error}">error</span>
+				<input type="search" name="searchName" id="searchName" value=""/> 
+				<input type="hidden" name="page" value=1 />
 				<button>検索</button>
+				<span class="error-messages" th:if="${error}!=null"
+					th:text="${error}">error</span>
 			</form>
 			
 		</div>
@@ -112,8 +133,5 @@
 	</div>
 	<!-- end container -->
 	
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script src="../../static/js/bootstrap.min.js"></script>
 </body>
 </html>

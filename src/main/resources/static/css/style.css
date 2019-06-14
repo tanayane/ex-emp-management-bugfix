@@ -9,3 +9,15 @@
 .error-messages {
 	color: #ff0000;
 }
+
+/*
+#searchName {
+	list-style-type: none;
+	color: red;
+	
+}
+*/
+
+.ui-helper-hidden-accessible {
+	display: none;
+}

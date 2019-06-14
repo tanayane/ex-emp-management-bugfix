@@ -67,6 +67,7 @@ public class EmployeeController {
 		model.addAttribute("employeeList", employeeList);
 		session.setAttribute("page",page);
 		model.addAttribute("size", employeeList.size());
+		model.addAttribute("names",employeeService.findAllNames());
 		return "employee/list";
 	}
 
@@ -143,6 +144,7 @@ public class EmployeeController {
 		model.addAttribute("searchName",searchName);
 		session.setAttribute("page",page);
 		model.addAttribute("size", employeeList.size());
+		model.addAttribute("names",employeeService.findAllNames());
 		return "employee/search";
 	}
 }

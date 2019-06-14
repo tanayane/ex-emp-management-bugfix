@@ -87,4 +87,9 @@ public class EmployeeService {
 		}
 
 	}
+	
+	
+	public List<String> findAllNames(){
+		return employeeRepository.findAllNames();
+	}
 }
