@@ -105,6 +105,11 @@ public class EmployeeRepository {
 		return developmentList;
 	}
 	
+	/**
+	 * 従業員の名前リストを取得.
+	 * 
+	 * @return 従業員の名前リスト
+	 */
 	public List<String> findAllNames() {
 		String sql = "SELECT name FROM employees ORDER BY hire_date";
 
@@ -113,5 +118,15 @@ public class EmployeeRepository {
 		return nameList;
 	}
 
+	/**
+	 * 従業員を新規登録する.
+	 * 
+	 * @param employee 登録する従業員情報
+	 */
+	public void insert(Employee employee) {
+		String sql = "insert into employees values((select max(id)+1 from employees),:name,:image,:gender,:hireDate,:mailAddress,:zipCode,:address,:telephone,:salary,:characteristics,:dependentsCount );";
+		SqlParameterSource param = new BeanPropertySqlParameterSource(employee);
+		template.update(sql, param);
+	}
 
 }

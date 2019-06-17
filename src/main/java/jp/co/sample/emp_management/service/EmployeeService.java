@@ -89,7 +89,21 @@ public class EmployeeService {
 	}
 	
 	
+	/**
+	 * 従業員の名前リストを検索.
+	 * 
+	 * @return 従業員の名前リスト
+	 */
 	public List<String> findAllNames(){
 		return employeeRepository.findAllNames();
+	}
+	
+	/**
+	 * 新規従業員の登録.
+	 * 
+	 * @param employee 登録する従業員情報
+	 */
+	public void insert(Employee employee) {
+		employeeRepository.insert(employee);
 	}
 }
